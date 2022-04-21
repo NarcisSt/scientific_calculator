@@ -74,15 +74,16 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
     });
   }
 
-  Widget buildButton(String buttonText, double buttonHeight, Color buttonColor,
-      Color textColor) {
+  Widget buildButton(
+      String buttonText, double buttonHeight, Color buttonColor, Color textColor) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.1 * buttonHeight,
+      width: MediaQuery.of(context).size.width * 0.5,
       color: buttonColor,
       child: FlatButton(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(0.0),
-              side: BorderSide(style: BorderStyle.none)),
+              borderRadius: BorderRadius.circular(10),
+              ),
           padding: EdgeInsets.all(16.0),
           onPressed: () => buttonPressed(buttonText),
           child: Text(
@@ -98,7 +99,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Simple Calculator')),
+      appBar: AppBar(title: Text('Doofenshmirtz Scientific Narcilator', textAlign: TextAlign.right,)),
       body: Column(
         children: <Widget>[
           Container(
@@ -106,7 +107,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
             padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
             child: Text(
               equation,
-              style: TextStyle(fontSize: equationFontSize),
+              style: TextStyle(fontSize: equationFontSize, color: Colors.white),
             ),
           ),
           Container(
@@ -114,7 +115,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
             padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
             child: Text(
               result,
-              style: TextStyle(fontSize: resultFontSize),
+              style: TextStyle(fontSize: resultFontSize, color: Colors.white),
             ),
           ),
           Expanded(
@@ -124,59 +125,42 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                width: MediaQuery.of(context).size.width * .75,
+                width: MediaQuery.of(context).size.width * 1,
                 child: Table(
                   children: [
                     TableRow(children: [
                       buildButton("AC", 1, Colors.black54, Colors.orange),
                       buildButton("⌫", 1, Colors.black54, Colors.orange),
                       buildButton("%", 1, Colors.black54, Colors.orange),
+                      buildButton("÷", 1, Colors.black54, Colors.orange),
                     ]),
                     TableRow(children: [
                       buildButton("7", 1, Colors.black54, Colors.white),
                       buildButton("8", 1, Colors.black54, Colors.white),
                       buildButton("9", 1, Colors.black54, Colors.white),
+                      buildButton("×", 1, Colors.black54, Colors.orange),
                     ]),
                     TableRow(children: [
                       buildButton("4", 1, Colors.black54, Colors.white),
                       buildButton("5", 1, Colors.black54, Colors.white),
                       buildButton("6", 1, Colors.black54, Colors.white),
+                      buildButton("-", 1, Colors.black54, Colors.orange),
                     ]),
                     TableRow(children: [
                       buildButton("1", 1, Colors.black54, Colors.white),
                       buildButton("2", 1, Colors.black54, Colors.white),
                       buildButton("3", 1, Colors.black54, Colors.white),
+                      buildButton("+", 1, Colors.black54, Colors.orange),
                     ]),
                     TableRow(children: [
                       buildButton("R", 1, Colors.black54, Colors.orange),
                       buildButton("0", 1, Colors.black54, Colors.white),
                       buildButton(".", 1, Colors.black54, Colors.white),
+                      buildButton("=", 1, Colors.deepPurple, Colors.white),
                     ]),
                   ],
                 ),
               ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.25,
-                child: Table(
-                  children: [
-                    TableRow(children: [
-                      buildButton("÷", 1, Colors.black54, Colors.orange),
-                    ]),
-                    TableRow(children: [
-                      buildButton("×", 1, Colors.black54, Colors.orange),
-                    ]),
-                    TableRow(children: [
-                      buildButton("-", 1, Colors.black54, Colors.orange),
-                    ]),
-                    TableRow(children: [
-                      buildButton("+", 1, Colors.black54, Colors.orange),
-                    ]),
-                    TableRow(children: [
-                      buildButton("=", 1, Colors.black54, Colors.orange),
-                    ]),
-                  ],
-                ),
-              )
             ],
           ),
         ],
