@@ -1,13 +1,13 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
 
 void main() {
-  runApp(Calculator());
+  runApp(const Calculator());
 }
 
 class Calculator extends StatelessWidget {
+  const Calculator({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,12 +16,14 @@ class Calculator extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.deepPurple,
           scaffoldBackgroundColor: Colors.black),
-      home: SimpleCalculator(),
+      home: const SimpleCalculator(),
     );
   }
 }
 
 class SimpleCalculator extends StatefulWidget {
+  const SimpleCalculator({Key? key}) : super(key: key);
+
   @override
   _SimpleCalculatorState createState() => _SimpleCalculatorState();
 }
@@ -47,6 +49,9 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
         if (equation == "") {
           equation = "0";
         }
+      } else if (buttonText == "↑") {
+        equation = result;
+        result = "0";
       } else if (buttonText == "=") {
         equationFontSize = 38.0;
         resultFontSize = 48.0;
@@ -69,14 +74,14 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
           double dblRes = double.parse(result);
           var x = dblRes - dblRes.truncate();
 
-          if (x == 0.0){
-              result = result.replaceAll('.0', '');
+          if (x == 0.0) {
+            result = result.replaceAll('.0', '');
           }
 
-          if(result.length > 20) {
+          if (result.length > 20) {
             resultFontSize = 25.0;
             equationFontSize = 20.0;
-          } else if(result.length > 10) {
+          } else if (result.length > 10) {
             resultFontSize = 38.0;
             equationFontSize = 28.0;
           } else {
@@ -90,7 +95,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
         if (equation.length > 16) {
           equationFontSize = 25.0;
           resultFontSize = 20.0;
-        } else if (equation.length > 10){
+        } else if (equation.length > 10) {
           equationFontSize = 38.0;
           resultFontSize = 28.0;
         } else {
@@ -115,7 +120,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           onPressed: () => buttonPressed(buttonText),
           child: Text(
             buttonText,
@@ -127,32 +132,11 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
     );
   }
 
-  Widget buildSecondaryButton(String buttonText, double buttonHeight,
-      Color buttonColor, Color textColor) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.1 * buttonHeight,
-      color: buttonColor,
-      child: FlatButton(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          padding: EdgeInsets.all(16.0),
-          onPressed: () => buttonPressed(buttonText),
-          child: Text(
-            buttonText,
-            style: TextStyle(
-                fontSize: 30.0,
-                fontWeight: FontWeight.normal,
-                color: textColor),
-          )),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(
+          title: const Text(
         'Doofenshmirtz Scientific Narcilator',
         textAlign: TextAlign.right,
       )),
@@ -160,7 +144,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
         children: <Widget>[
           Container(
             alignment: Alignment.centerRight,
-            padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+            padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
             child: Text(
               equation,
               style: TextStyle(fontSize: equationFontSize, color: Colors.white),
@@ -168,25 +152,25 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
           ),
           Container(
             alignment: Alignment.centerRight,
-            padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+            padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
             child: Text(
               result,
               style: TextStyle(fontSize: resultFontSize, color: Colors.white),
             ),
           ),
-          Expanded(
+          const Expanded(
             child: Divider(),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width * 1,
                 child: Table(
                   children: [
                     TableRow(children: [
-                      buildButton(" π", 1, Colors.black54, Colors.grey, 20.0),
-                      buildButton("lg", 1, Colors.black54, Colors.grey, 20.0),
+                      buildButton("π", 1, Colors.black54, Colors.grey, 20.0),
+                      buildButton("e", 1, Colors.black54, Colors.grey, 20.0),
                       buildButton("ln", 1, Colors.black54, Colors.grey, 20.0),
                       buildButton("(", 1, Colors.black54, Colors.grey, 30.0),
                       buildButton(")", 1, Colors.black54, Colors.grey, 30.0),
@@ -220,7 +204,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
                       buildButton("+", 1, Colors.black54, Colors.orange, 30.0),
                     ]),
                     TableRow(children: [
-                      buildButton(" e", 1, Colors.black54, Colors.white, 30.0),
+                      buildButton("↑", 1, Colors.black54, Colors.grey, 30.0),
                       buildButton("0", 1, Colors.black54, Colors.white, 30.0),
                       buildButton("00", 1, Colors.black54, Colors.white, 30.0),
                       buildButton(".", 1, Colors.black54, Colors.white, 30.0),
